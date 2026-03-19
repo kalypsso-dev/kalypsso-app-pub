@@ -1,0 +1,3 @@
+[submodule "kalypsso-core"]
+	path = external/kalypsso-core
+	url = git@github.com:kalypsso-dev/kalypsso-core.git

@@ -1,0 +1,44 @@
+version = 1
+SPDX-PackageName = "kalypsso-app-pub"
+SPDX-PackageSupplier = "kalypsso-app-pub authors"
+SPDX-PackageDownloadLocation = "https://github.com/kalypsso-dev/kalypsso-app-pub"
+
+[[annotations]]
+path = [
+    ".github/**",  "Readme.md",  "doc/**"
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "kalypsso-app-pub authors"
+SPDX-License-Identifier = "Apache-2.0 WITH LLVM-exception"
+
+[[annotations]]
+path = [
+    ".clang-format", ".clangd", ".pre-commit-config.yaml", "REUSE.toml", ".git-blame-ignore-revs", ".editorconfig", ".cmake-format.py", "**/.gitignore", ".gitmodules", "_typos.toml"
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "kalypsso-app-pub authors"
+SPDX-License-Identifier = "Unlicense"
+
+[[annotations]]
+path = [
+    "**/CMakeLists.txt", "**/*.cmake", "kalypsso-app-pub-config.cmake.in"
+]
+precedence = "override"
+SPDX-FileCopyrightText = "kalypsso-app-pub authors"
+SPDX-License-Identifier = "Unlicense"
+
+[[annotations]]
+path = [
+    "src/**/app/**/*.ini", "src/**/app/**/*.sh", "src/**/app/**/*.py", "src/**/app/**/*.ini.tmpl", "src/**/app/**/*.sh.tmpl", "src/**/app/**/Readme.md", "src/**/app/**/README.md", "src/**/app/**/readme.md", "src/**/Readme.md"
+]
+precedence = "override"
+SPDX-FileCopyrightText = "kalypsso-app-pub authors"
+SPDX-License-Identifier = "Apache-2.0 WITH LLVM-exception"
+
+[[annotations]]
+path = [
+    "src/godunov_hydro/app/sedov_blast/sedov_fortran/**"
+]
+precedence = "override"
+SPDX-FileCopyrightText = "F.X. Timmes"
+SPDX-License-Identifier = "Unlicense"

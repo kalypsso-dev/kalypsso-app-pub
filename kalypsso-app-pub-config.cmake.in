@@ -1,0 +1,10 @@
+@PACKAGE_INIT@
+
+#
+# we need to install dependencies that were part of the build
+#
+include(CMakeFindDependencyMacro)
+
+
+include(${CMAKE_CURRENT_LIST_DIR}/kalypsso-app-pub-targets.cmake)
+check_required_components(@PROJECT_NAME_SC@)

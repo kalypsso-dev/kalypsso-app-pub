@@ -1,3 +1,6 @@
 [submodule "kalypsso-core"]
 	path = external/kalypsso-core
 	url = git@github.com:kalypsso-dev/kalypsso-core.git
+[submodule "godunov_hydro"]
+	path = src/godunov_hydro
+	url = git@github.com:kalypsso-dev/godunov_hydro.git

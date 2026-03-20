@@ -3,7 +3,7 @@ if(KALYPSSO_APP_PUB_ENABLE_SOLVER_GODUNOV_HYDRO)
 endif()
 
 if(KALYPSSO_APP_PUB_ENABLE_SOLVER_GODUNOV_FIVE_EQ)
-#  add_subdirectory(godunov_five_eq)
+  add_subdirectory(godunov_five_eq)
 endif()
 
 if(KALYPSSO_APP_PUB_ENABLE_SOLVER_GODUNOV_MHD_CT)

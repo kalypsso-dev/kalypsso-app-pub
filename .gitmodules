@@ -4,3 +4,6 @@
 [submodule "godunov_hydro"]
 	path = src/godunov_hydro
 	url = git@github.com:kalypsso-dev/godunov_hydro.git
+[submodule "godunov_five_eq"]
+	path = src/godunov_five_eq
+	url = git@github.com:kalypsso-dev/godunov_five_eq.git

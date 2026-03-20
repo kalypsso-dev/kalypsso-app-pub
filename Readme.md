@@ -98,8 +98,9 @@ cmake --build _build/cuda -j 8
 ```
 
 Important note regarding Kokkos/Cuda backend:
-- if you build on the same platform as the one used to run kalypsso-app, you're all set, kokkos build system will auto-detect GPU architecture
-- if you build on a different system, you need to specify the target architecture, e.g. `-DKokkos_ARCH_HOPPER90=ON` (for Nvidia Hopper aka `sm_90` architecture). Run `ccmake --build _build/cuda` to navigate all available Kokkos architecture cmake options.
+- if you build on the same platform as the one used to run `kalypsso-app`, you're all set, kokkos build system will auto-detect GPU architecture;
+- if you build on a different system, you need to specify the target architecture, e.g. `-DKokkos_ARCH_HOPPER90=ON` (for Nvidia Hopper aka `sm_90` architecture). Run `ccmake --build _build/cuda` to navigate all available Kokkos architecture cmake options;
+- using a Cuda-aware MPI implementation is absolutely required only if you plan to use more than one GPU. So by default, MPI implementation is expected to by cuda-aware. Conversely, if you only have access to machine that has a single GPU, you can safely deactivate the use of MPI; to do that just use cmake variable `KALYPSSO_CORE_USE_MPI=OFF`.
 
 Please note that you don't have to specify environment variable CXX (set to `nvcc_wrapper` when targeting CUDA backend), each sub-project (p4est / Kokkos / Kalypsso) is built with a custom specific `CMAKE_CXX_COMPILER` variable; if `KALYPSSO_CORE_KOKKOS_BACKEND` is `Cuda`, internally `nvcc_wrapper` will be selected to build both Kokkos, kalypsso-core and kalypsso-app.
 

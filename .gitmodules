@@ -7,3 +7,6 @@
 [submodule "godunov_five_eq"]
 	path = src/godunov_five_eq
 	url = git@github.com:kalypsso-dev/godunov_five_eq.git
+[submodule "godunov_mhd_ct"]
+	path = src/godunov_mhd_ct
+	url = git@github.com:kalypsso-dev/godunov_mhd_ct.git

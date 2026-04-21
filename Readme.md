@@ -74,7 +74,6 @@ cd kalypsso-app
 cmake -B _build/openmp -S. \
    -DKALYPSSO_APP_KALYPSSO_CORE_BUILD:BOOL=ON \
    -DKALYPSSO_CORE_KOKKOS_BUILD:BOOL=ON \
-   -DKALYPSSO_CORE_KOKKOS_BUILD:BOOL=ON \
    -DKALYPSSO_CORE_KOKKOS_BACKEND=OpenMP \
    -DKALYPSSO_CORE_BUILD_P4EST:BOOL=ON
 cmake --build _build/openmp -j 8
@@ -90,7 +89,6 @@ Here is the same command lines for building with Kokkos/CUDA backend
 cd kalypsso-app
 cmake -B _build/cuda -S. \
    -DKALYPSSO_APP_KALYPSSO_CORE_BUILD:BOOL=ON \
-   -DKALYPSSO_CORE_KOKKOS_BUILD:BOOL=ON \
    -DKALYPSSO_CORE_KOKKOS_BUILD:BOOL=ON \
    -DKALYPSSO_CORE_KOKKOS_BACKEND=Cuda \
    -DKALYPSSO_CORE_BUILD_P4EST:BOOL=ON

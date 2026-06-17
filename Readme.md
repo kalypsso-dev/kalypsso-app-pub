@@ -16,6 +16,10 @@ Let's remind that:
 - 2d/3d distributed memory AMR mesh management is implemented through a thin layer on top of [p4est](https:://github.com/cburstedde/p4est)
 - we use the C++ [kokkos](https://github.com/kokkos/kokkos) library for shared memory parallelism and performance portability across all current HPC hardware architectures (from `x86_64` or ARM CPU to NVIDIA or AMD GPUs).
 
+You will find more technical details about kalypsso in the following article:
+
+- Kestener, Pierre, Kalypsso: A Performance Portable Platform for Compressible Hydrodynamics Simulations using Adaptive Mesh Refinement. https://doi.org/10.1016/j.cpc.2026.110275
+
 
 # Example applications
 
@@ -71,7 +75,7 @@ Here is an example command line to build `kalypsso-app` and `kalypsso-core` for 
 
 ```bash
 cd kalypsso-app
-cmake -B _build/openmp -S. \
+cmake -B _build/openmp -S . \
    -DKALYPSSO_APP_KALYPSSO_CORE_BUILD:BOOL=ON \
    -DKALYPSSO_CORE_KOKKOS_BUILD:BOOL=ON \
    -DKALYPSSO_CORE_KOKKOS_BACKEND=OpenMP \
@@ -87,7 +91,7 @@ Note that by default, only the simple monfuid application will be built; you mus
 Here is the same command lines for building with Kokkos/CUDA backend
 ```bash
 cd kalypsso-app
-cmake -B _build/cuda -S. \
+cmake -B _build/cuda -S . \
    -DKALYPSSO_APP_KALYPSSO_CORE_BUILD:BOOL=ON \
    -DKALYPSSO_CORE_KOKKOS_BUILD:BOOL=ON \
    -DKALYPSSO_CORE_KOKKOS_BACKEND=Cuda \
@@ -122,6 +126,7 @@ Please note that you don't have to specify environment variable CXX (set to `nvc
 ### [doxygen](https://www.doxygen.nl/)
 
 ```shell
+# re-run cmake with additional options
 cmake -B _build/doc -S . -DKALYPSSO_APP_BUILD_DOC=ON -DKALYPSSO_APP_DOC=doxygen
 cd _build/doc
 make
@@ -154,3 +159,19 @@ mkdocs build
 # this will create directory `site` that can directly be uploaded to
 # a web server
 ```
+
+# Citing kalypsso
+
+If you use this software, please cite it using the following reference.
+
+```
+@article{kalypsso_core_cpc26,
+  author={Kestener, Pierre},
+  journal={Computer Physics Communication},
+  title={kalypsso: a performance portable platform for compressible hydrodynamics simulations using adaptive mesh refinement},
+  year={2026},
+  volume={},
+  number={},
+  pages={},
+  doi={10.1016/j.cpc.2026.110275}}
+  ```

@@ -13,7 +13,7 @@ SPDX-License-Identifier = "Apache-2.0 WITH LLVM-exception"
 
 [[annotations]]
 path = [
-    ".clang-format", ".clangd", ".pre-commit-config.yaml", "REUSE.toml", ".git-blame-ignore-revs", ".editorconfig", ".cmake-format.py", "**/.gitignore", ".gitmodules", "_typos.toml"
+    ".clang-format", ".clangd", ".pre-commit-config.yaml", "REUSE.toml", ".git-blame-ignore-revs", ".editorconfig", ".cmake-format.py", "**/.gitignore", ".gitmodules", "_typos.toml", "CITATION.cff"
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "kalypsso-app-pub authors"

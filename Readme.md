@@ -63,8 +63,6 @@ These dependencies can either be :
 - built along kalypsso (most convenient and recommended for a beginner)
 - built in a separate cmake sub-project (located in sub-directory `dependencies`); this third option is a bit cleaner, it additionally provides a modulefiles to ease the use of these dependencies.
 
-Note: [spack](https://spack.readthedocs.io/en/latest/) can be used to install all dependencies (except cnpy). We'll provide a recipe soon in user documentation.
-
 ## Let's build kalypsso-app
 
 ### build kalypsso-app and its dependencies all together

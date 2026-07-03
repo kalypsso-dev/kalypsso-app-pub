@@ -1,0 +1,89 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            cuda: "12.5.0"
+
+    env:
+      config: "Release"
+
+    steps:
+      - name: hardware info
+        run: cat /proc/cpuinfo
+      - name: update
+        run: sudo apt update
+      - name: Install native dependencies
+        run: sudo apt install -y libhwloc-dev mpi-default-dev libhdf5-openmpi-dev libspdlog-dev
+
+      - name: Install CUDA
+        uses: Jimver/cuda-toolkit@v0.2.17
+        id: cuda-toolkit
+        if: runner.os == 'Linux'
+        with:
+          sub-packages: '["nvcc", "nvrtc", "cudart"]'
+          cuda: ${{ matrix.cuda }}
+          method: network
+          use-github-cache: true
+
+      - name: nvcc check
+        shell: bash
+        run: |
+          nvcc -V
+          echo "Installed cuda version is: ${{steps.cuda-toolkit.outputs.cuda}}"
+          echo "Cuda install location: ${{steps.cuda-toolkit.outputs.CUDA_PATH}}"
+          ls "$CUDA_PATH"
+          ls "$CUDA_PATH/bin"
+          ls "$CUDA_PATH/include"
+
+      - name: cmake version
+        shell: bash
+        run: cmake --version
+
+      # make sure to explicitly checkout git submodule !
+      - name: checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: configure_openmp
+        run: cmake -S . -B build_openmp -DCMAKE_BUILD_TYPE=Debug -DKALYPSSO_CORE_ENABLE_UNIT_TESTING=ON -DKALYPSSO_APP_KALYPSSO_CORE_BUILD:BOOL=ON -DKALYPSSO_CORE_KOKKOS_BUILD=ON -DKALYPSSO_CORE_KOKKOS_BACKEND=OpenMP -DKALYPSSO_CORE_BUILD_P4EST:BOOL=ON -DKALYPSSO_CORE_ENABLE_SOLVER_GODUNOV_MHD_CT=ON -DKALYPSSO_CORE_ENABLE_SOLVER_GODUNOV_FIVE_EQ=ON -DKALYPSSO_CORE_ENABLE_WARNINGS=ON
+
+      - name: make_openmp
+        id: make_openmp
+        run: cmake --build build_openmp --parallel 4
+
+      - name: upload_build_openmp_log
+        if: ${{ failure() && steps.make_openmp.outcome == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: build_openmp_log
+          path: build_openmp
+          retention-days: 1
+
+      - name: configure_cuda
+        run: cmake -S . -B build_cuda -DKALYPSSO_APP_KALYPSSO_CORE_BUILD:BOOL=ON -DKALYPSSO_CORE_KOKKOS_BUILD:BOOL=ON -DKALYPSSO_CORE_KOKKOS_BACKEND=Cuda -DKokkos_ARCH_AMPERE80=ON -DKALYPSSO_CORE_BUILD_P4EST:BOOL=ON -DKALYPSSO_APP_PUB_ENABLE_SOLVER_GODUNOV_MHD_CT=ON -DKALYPSSO_APP_PUB_ENABLE_SOLVER_GODUNOV_FIVE_EQ=ON -DKALYPSSO_CORE_ENABLE_WARNINGS=ON
+
+      - name: make_cuda
+        run: cmake --build build_cuda --parallel 4
+
+      - name: upload_build_cuda_log
+        if: ${{ failure() && steps.make_cuda.outcome == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: build_cuda_log
+          path: build_cuda
+          retention-days: 1

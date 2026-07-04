@@ -1,11 +1,13 @@
+include(${CMAKE_SOURCE_DIR}/cmake/add_subdirectory_if_not_empty.cmake)
+
 if(KALYPSSO_APP_PUB_ENABLE_SOLVER_GODUNOV_HYDRO)
-  add_subdirectory(godunov_hydro)
+  add_subdirectory_if_not_empty(godunov_hydro)
 endif()
 
 if(KALYPSSO_APP_PUB_ENABLE_SOLVER_GODUNOV_FIVE_EQ)
-  add_subdirectory(godunov_five_eq)
+  add_subdirectory_if_not_empty(godunov_five_eq)
 endif()
 
 if(KALYPSSO_APP_PUB_ENABLE_SOLVER_GODUNOV_MHD_CT)
-  add_subdirectory(godunov_mhd_ct)
+  add_subdirectory_if_not_empty(godunov_mhd_ct)
 endif()

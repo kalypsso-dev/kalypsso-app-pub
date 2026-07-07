@@ -84,7 +84,9 @@ cmake --build _build/openmp -j 8
 Cmake variable `KALYPSSO_APP_KALYPSSO_CORE_BUILD` is a boolean variable used to trigger building `kalypsso-core`. Here we do want to build `kalypsso-core`.
 Other cmake variable prefixed with `KALYPSSO_CORE` are directly passed to `kalypsso-core` build system and used to specify (among other things) which kokkos default backend we want (see `kalypsso-core` documentation for more information).
 
-Note that by default, only the simple monfuid application will be built; you must explicitly turn cmake options to enable building the other applications.
+Please note that library spdlog is a required dependency. If spdlog is not already installed on your system, you can ask kalypsso-core to build it for you by adding option `-DKALYPSSO_CORE_BUILD_SPDLOG=ON`
+
+Also note that by default, only the simple monofuid application will be built; you must explicitly turn cmake options to enable building the other applications.
 
 Here is the same command lines for building with Kokkos/CUDA backend
 ```bash
